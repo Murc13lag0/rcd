@@ -16,7 +16,13 @@ cargo install --path .
 ## Shell integration (Bash)
 Add to `~/.bashrc`:
 ```bash
-rcd() { builtin cd -- "$(command rcd "$@" | head -n1)"; }
+rcd() {
+    local target
+    target="$(command rcd "$@")" || return
+    case "$target" in
+        /*) builtin cd -- "$target" ;;
+    esac
+}
 ```
 Reload:
 ```bash
