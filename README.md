@@ -32,8 +32,13 @@ source ~/.bashrc
 ## Shell integration (Zsh)
 Add to `~/.zshrc`:
 ```zsh
-rcd() { builtin cd -- "$(command rcd "$@" | head -n1)"; }
-```
+rcd() {
+    local target
+    target="$(command rcd "$@")" || return
+    case "$target" in
+        /*) builtin cd -- "$target" ;;
+    esac
+}```
 Reload:
 ```zsh
 source ~/.zshrc
@@ -42,7 +47,13 @@ source ~/.zshrc
 ## Shell integration (macOS Bash)
 Add to `~/.bashrc`:
 ```bash
-rcd() { builtin cd -- "$(command rcd "$@" | head -n1)"; }
+rcd() {
+    local target
+    target="$(command rcd "$@")" || return
+    case "$target" in
+        /*) builtin cd -- "$target" ;;
+    esac
+}
 ```
 Ensure login shells load it:
 ```bash
@@ -74,7 +85,13 @@ function rcd {
 ## Shell integration (Git Bash / MSYS2 / Cygwin on Windows)
 Add to `~/.bashrc`:
 ```bash
-rcd() { builtin cd -- "$(command rcd "$@" | head -n1)"; }
+rcd() {
+    local target
+    target="$(command rcd "$@")" || return
+    case "$target" in
+        /*) builtin cd -- "$target" ;;
+    esac
+}
 ```
 Reload:
 ```bash
