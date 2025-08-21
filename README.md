@@ -1,5 +1,5 @@
 # rcd
-Straight to the point: Matches one or multiple paths and `cd`s into it.
+Straight to the point: Matches one or multiple paths and `cd`s into the selection.
 
 ## Prerequisites
 ```bash
